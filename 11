@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life Reset Game</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #2c5282;
+    }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #edf2f7;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .task input[type="checkbox"] {
+      transform: scale(1.5);
+    }
+    .progress-bar {
+      background: #cbd5e0;
+      border-radius: 8px;
+      height: 20px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress-fill {
+      background: #63b3ed;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease-in-out;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .stats div {
+      background: #ebf8ff;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+      margin: 0 5px;
+    }
+    .btn {
+      background: #3182ce;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto 0 auto;
+    }
+    .btn:hover {
+      background: #2b6cb0;
+    }
+    #levelUpMessage {
+      display: none;
+      text-align: center;
+      color: #38a169;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌱 Life Reset Game</h1>
+    <h2>Day 1 Tasks</h2>
+
+    <div class="task">
+      <label>💧 Drink 8 cups of water</label>
+      <input type="checkbox" onchange="updateTask(this, 10)">
+    </div>
+    <div class="task">
+      <label>😴 Sleep at least 7 hours</label>
+      <input type="checkbox" onchange="updateTask(this, 10)">
+    </div>
+    <div class="task">
+      <label>🧘‍♂️ Meditate for 5 minutes</label>
+      <input type="checkbox" onchange="updateTask(this, 10)">
+    </div>
+    <div class="task">
+      <label>🏃‍♂️ Exercise for 15 minutes</label>
+      <input type="checkbox" onchange="updateTask(this, 10)">
+    </div>
+
+    <div class="stats">
+      <div>
+        <strong>XP:</strong> <span id="xp">0</span>/100
+        <div class="progress-bar">
+          <div class="progress-fill" id="xpBar"></div>
+        </div>
+      </div>
+      <div>
+        <strong>Coins:</strong> <span id="coins">0</span>
+      </div>
+    </div>
+
+    <div id="levelUpMessage">🎉 You leveled up! Great job! 🎉</div>
+
+    <button class="btn" onclick="resetDay()">Start New Day</button>
+  </div>
+
+  <script>
+    let xp = 0;
+    let coins = 0;
+
+    function updateTask(checkbox, value) {
+      if (checkbox.checked) {
+        xp += value;
+        coins += 1;
+      } else {
+        xp -= value;
+        coins = Math.max(0, coins - 1);
+      }
+      xp = Math.max(0, xp);
+      document.getElementById("xp").innerText = xp;
+      document.getElementById("coins").innerText = coins;
+      document.getElementById("xpBar").style.width = (xp % 100) + "%";
+
+      if (xp >= 100) {
+        document.getElementById("levelUpMessage").style.display = "block";
+      } else {
+        document.getElementById("levelUpMessage").style.display = "none";
+      }
+    }
+
+    function resetDay() {
+      let checkboxes = document.querySelectorAll("input[type='checkbox']");
+      checkboxes.forEach(cb => cb.checked = false);
+      xp = 0;
+      coins = 0;
+      document.getElementById("xp").innerText = xp;
+      document.getElementById("coins").innerText = coins;
+      document.getElementById("xpBar").style.width = "0%";
+      document.getElementById("levelUpMessage").style.display = "none";
+    }
+  </script>
+</body>
+</html>
