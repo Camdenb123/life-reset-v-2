@@ -1,172 +1,271 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Life Reset Game</title>
-  <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#00796b" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background-color: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
-    }
-    h1, h2 {
-      text-align: center;
-      color: #2c5282;
-    }
-    .task {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #edf2f7;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    .task input[type="checkbox"] {
-      transform: scale(1.5);
-    }
-    .progress-bar {
-      background: #cbd5e0;
-      border-radius: 8px;
-      height: 20px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-    .progress-fill {
-      background: #63b3ed;
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s ease-in-out;
-    }
-    .stats {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .stats div {
-      background: #ebf8ff;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      flex: 1;
-      margin: 0 5px;
-    }
-    .btn {
-      background: #3182ce;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-      display: block;
-      margin: 20px auto 0 auto;
-    }
-    .btn:hover {
-      background: #2b6cb0;
-    }
-    #levelUpMessage {
-      display: none;
-      text-align: center;
-      color: #38a169;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zen Life Reset</title>
+
+  <!-- PWA Manifest and theme color -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#00796b" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #fff3e0);
+      overflow: hidden;
+      color: #37474f;
+    }
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 25px;
+      background: #ffffffcc;
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 5px;
+      color: #00796b;
+    }
+    h2 {
+      text-align: center;
+      font-weight: normal;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+    .quote {
+      text-align: center;
+      font-style: italic;
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #616161;
+    }
+    .task {
+      background: #fafafa;
+      border: 1px solid #cfd8dc;
+      border-radius: 10px;
+      padding: 15px 20px;
+      margin: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .task label {
+      font-size: 16px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .task label img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+    .task input[type="checkbox"] {
+      transform: scale(1.4);
+      margin-left: 15px;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .stats div {
+      background: #e0f2f1;
+      border-radius: 10px;
+      padding: 15px;
+      width: 30%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .progress-bar {
+      margin-top: 10px;
+      background: #b2dfdb;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 14px;
+    }
+    .progress-fill {
+      background: #00796b;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease-in-out;
+    }
+    #levelUpMessage {
+      margin-top: 15px;
+      text-align: center;
+      color: #388e3c;
+      font-weight: bold;
+    }
+    .btn {
+      background: #00796b;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 30px auto 0;
+      display: block;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #004d40;
+    }
+    .leaves {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .leaf {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/427/427735.png');
+      background-size: cover;
+      animation: float 12s infinite linear;
+    }
+    @keyframes float {
+      0% { transform: translateY(-10%) rotate(0deg); }
+      100% { transform: translateY(120vh) rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🌱 Life Reset Game</h1>
-    <h2>Day 1 Tasks</h2>
+  <audio id="bgSound" loop autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8b69469818.mp3?filename=soft-wind-ambient-112417.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="checkSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c804f5a2a.mp3?filename=correct-2-46134.mp3"></audio>
 
-    <div class="task">
-      <label>💧 Drink 8 cups of water</label>
-      <input type="checkbox" onchange="updateTask(this, 10)">
-    </div>
-    <div class="task">
-      <label>😴 Sleep at least 7 hours</label>
-      <input type="checkbox" onchange="updateTask(this, 10)">
-    </div>
-    <div class="task">
-      <label>🧘‍♂️ Meditate for 5 minutes</label>
-      <input type="checkbox" onchange="updateTask(this, 10)">
-    </div>
-    <div class="task">
-      <label>🏃‍♂️ Exercise for 15 minutes</label>
-      <input type="checkbox" onchange="updateTask(this, 10)">
-    </div>
+  <div class="leaves"></div>
+  <div class="container">
+    <h1>🧘 Zen Life Reset</h1>
+    <h2>Restore balance. One day at a time.</h2>
+    <div class="quote" id="quote"></div>
 
-    <div class="stats">
-      <div>
-        <strong>XP:</strong> <span id="xp">0</span>/100
-        <div class="progress-bar">
-          <div class="progress-fill" id="xpBar"></div>
-        </div>
-      </div>
-      <div>
-        <strong>Coins:</strong> <span id="coins">0</span>
-      </div>
-    </div>
+    <div class="task"><label for="task1"><img src="https://cdn-icons-png.flaticon.com/512/728/728093.png">Drink 8 cups of water</label><input type="checkbox" id="task1" onchange="updateTask(this, 10)" /></div>
+    <div class="task"><label for="task2"><img src="https://cdn-icons-png.flaticon.com/512/869/869869.png">Sleep at least 7 hours</label><input type="checkbox" id="task2" onchange="updateTask(this, 10)" /></div>
+    <div class="task"><label for="task3"><img src="https://cdn-icons-png.flaticon.com/512/3585/3585091.png">Meditate for 5 minutes</label><input type="checkbox" id="task3" onchange="updateTask(this, 10)" /></div>
+    <div class="task"><label for="task4"><img src="https://cdn-icons-png.flaticon.com/512/809/809957.png">Exercise for 15 minutes</label><input type="checkbox" id="task4" onchange="updateTask(this, 10)" /></div>
 
-    <div id="levelUpMessage">🎉 You leveled up! Great job! 🎉</div>
+    <div class="stats">
+      <div><strong>XP</strong><div><span id="xp">0</span>/100</div><div class="progress-bar"><div class="progress-fill" id="xpBar"></div></div></div>
+      <div><strong>Coins</strong><div><span id="coins">0</span></div></div>
+      <div><strong>Streak</strong><div><span id="streak">0</span> days</div></div>
+    </div>
 
-    <button class="btn" onclick="resetDay()">Start New Day</button>
-  </div>
+    <div id="levelUpMessage">🎉 You leveled up! Great job! 🎉</div>
+    <button class="btn" onclick="resetDay()">Start New Day</button>
+  </div>
 
-  <script>
-    let xp = 0;
-    let coins = 0;
+  <script>
+    let xp = parseInt(localStorage.getItem('xp')) || 0;
+    let coins = parseInt(localStorage.getItem('coins')) || 0;
+    let streak = parseInt(localStorage.getItem('streak')) || 0;
+    let lastReset = localStorage.getItem('lastResetDate') || '';
+    const today = new Date().toISOString().split('T')[0];
+    const taskIds = ["task1", "task2", "task3", "task4"];
+    const quotes = [
+      "“Breathe. Let go. And remind yourself that this very moment is the only one you know you have for sure.”",
+      "“Peace comes from within. Do not seek it without.” – Buddha",
+      "“Almost everything will work again if you unplug it for a few minutes, including you.” – Anne Lamott",
+      "“The quieter you become, the more you can hear.”",
+      "“You are the sky. Everything else is just the weather.” – Pema Chödrön"
+    ];
 
-    function updateTask(checkbox, value) {
-      if (checkbox.checked) {
-        xp += value;
-        coins += 1;
-      } else {
-        xp -= value;
-        coins = Math.max(0, coins - 1);
-      }
-      xp = Math.max(0, xp);
-      document.getElementById("xp").innerText = xp;
-      document.getElementById("coins").innerText = coins;
-      document.getElementById("xpBar").style.width = (xp % 100) + "%";
+    document.getElementById("xp").innerText = xp;
+    document.getElementById("coins").innerText = coins;
+    document.getElementById("streak").innerText = streak;
+    document.getElementById("xpBar").style.width = (xp % 100) + "%";
+    document.getElementById("quote").innerText = quotes[Math.floor(Math.random() * quotes.length)];
+    if (xp >= 100) document.getElementById("levelUpMessage").style.display = "block";
 
-      if (xp >= 100) {
-        document.getElementById("levelUpMessage").style.display = "block";
-      } else {
-        document.getElementById("levelUpMessage").style.display = "none";
-      }
-    }
+    taskIds.forEach(id => {
+      const cb = document.getElementById(id);
+      cb.checked = localStorage.getItem(id) === "true";
+    });
 
-    function resetDay() {
-      let checkboxes = document.querySelectorAll("input[type='checkbox']");
-      checkboxes.forEach(cb => cb.checked = false);
-      xp = 0;
-      coins = 0;
-      document.getElementById("xp").innerText = xp;
-      document.getElementById("coins").innerText = coins;
-      document.getElementById("xpBar").style.width = "0%";
-      document.getElementById("levelUpMessage").style.display = "none";
-    }
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-    .then(() => console.log('Service Worker Registered'))
-    .catch(err => console.error('Service Worker Registration Failed:', err));
-  }
-</script>
+    function updateTask(checkbox, value) {
+      const sound = document.getElementById("checkSound");
+      sound.currentTime = 0;
+      sound.play();
+      let id = checkbox.id;
+      if (checkbox.checked) {
+        xp += value;
+        coins += 1;
+      } else {
+        xp -= value;
+        coins = Math.max(0, coins - 1);
+      }
+      xp = Math.max(0, xp);
+      document.getElementById("xp").innerText = xp;
+      document.getElementById("coins").innerText = coins;
+      document.getElementById("xpBar").style.width = (xp % 100) + "%";
+      localStorage.setItem("xp", xp);
+      localStorage.setItem("coins", coins);
+      localStorage.setItem(id, checkbox.checked);
+      document.getElementById("levelUpMessage").style.display = xp >= 100 ? "block" : "none";
+    }
+
+    function resetDay() {
+      const note = prompt("🌅 Reflection: What went well today or how do you feel right now?");
+      if (note) localStorage.setItem("reflection_" + today, note);
+
+      if (lastReset !== today) {
+        streak += 1;
+        lastReset = today;
+        localStorage.setItem("streak", streak);
+        localStorage.setItem("lastResetDate", today);
+      }
+
+      taskIds.forEach(id => {
+        document.getElementById(id).checked = false;
+        localStorage.setItem(id, false);
+      });
+      xp = 0;
+      coins = 0;
+      document.getElementById("xp").innerText = xp;
+      document.getElementById("coins").innerText = coins;
+      document.getElementById("xpBar").style.width = "0%";
+      document.getElementById("levelUpMessage").style.display = "none";
+      localStorage.setItem("xp", xp);
+      localStorage.setItem("coins", coins);
+      document.getElementById("streak").innerText = streak;
+    }
+
+    // Floating leaves animation
+    const leavesContainer = document.querySelector(".leaves");
+    for (let i = 0; i < 10; i++) {
+      const leaf = document.createElement("div");
+      leaf.classList.add("leaf");
+      leaf.style.left = Math.random() * 100 + "vw";
+      leaf.style.animationDuration = (10 + Math.random() * 10) + "s";
+      leaf.style.opacity = Math.random();
+      leavesContainer.appendChild(leaf);
+    }
+
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Registration Failed:', err));
+    }
+  </script>
 </body>
 </html>
