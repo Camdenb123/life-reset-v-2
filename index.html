@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Life Reset Game</title>
+  <link rel="manifest" href="manifest.json" />
+<meta name="theme-color" content="#00796b" />
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -159,6 +161,12 @@
       document.getElementById("xpBar").style.width = "0%";
       document.getElementById("levelUpMessage").style.display = "none";
     }
-  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log('Service Worker Registered'))
+    .catch(err => console.error('Service Worker Registration Failed:', err));
+  }
+</script>
 </body>
 </html>
