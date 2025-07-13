@@ -1,260 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zen Life Reset</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#00796b" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(to bottom right, #e0f7fa, #fff3e0);
-      color: #37474f;
-    }
-    .container {
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 25px;
-      background: #ffffffcc;
-      backdrop-filter: blur(8px);
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 5px;
-      color: #00796b;
-    }
-    h2 {
-      text-align: center;
-      font-weight: normal;
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 20px;
-    }
-    .reading {
-      text-align: center;
-      font-style: italic;
-      font-size: 14px;
-      margin-bottom: 20px;
-      color: #616161;
-    }
-    .task {
-      background: #fafafa;
-      border: 1px solid #cfd8dc;
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin: 15px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 16px;
-    }
-    .task label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .task input[type="checkbox"] {
-      transform: scale(1.3);
-    }
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-      text-align: center;
-    }
-    .stats div {
-      background: #e0f2f1;
-      border-radius: 10px;
-      padding: 15px;
-      width: 30%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    .progress-bar {
-      margin-top: 10px;
-      background: #b2dfdb;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 14px;
-    }
-    .progress-fill {
-      background: #00796b;
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s ease-in-out;
-    }
-    #levelUpMessage {
-      margin-top: 15px;
-      text-align: center;
-      color: #388e3c;
-      font-weight: bold;
-      display: none;
-    }
-    .btn {
-      background: #00796b;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      margin: 30px auto 0;
-      display: block;
-      cursor: pointer;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zen Life Reset</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#00796b" />
+  <style>
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #fff3e0);
+      color: #37474f;
+    }
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 25px;
+      background: #ffffffcc;
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      text-align: center;
+      color: #00796b;
+    }
+    .reading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .reading button {
+      background: #00796b;
+      color: white;
+      padding: 10px 16px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .task {
+      background: #fafafa;
+      border: 1px solid #cfd8dc;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+    }
+    .task label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .task input[type="checkbox"] {
+      transform: scale(1.3);
+    }
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .stats div {
+      background: #e0f2f1;
+      border-radius: 10px;
+      padding: 15px;
+      width: 30%;
+    }
+    .progress-bar {
+      margin-top: 10px;
+      background: #b2dfdb;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 14px;
+    }
+    .progress-fill {
+      background: #00796b;
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease-in-out;
+    }
+    #levelUpMessage {
+      margin-top: 15px;
+      text-align: center;
+      color: #388e3c;
+      font-weight: bold;
+      display: none;
+    }
+    .btn {
+      background: #00796b;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin: 30px auto 0;
+      display: block;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background: white;
+      margin: 15% auto;
+      padding: 20px;
+      width: 80%;
+      border-radius: 10px;
+      max-width: 500px;
+    }
+    .close {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🧘 Zen Life Reset</h1>
-    <h2>Day <span id="dayNumber"></span> of 60</h2>
-    <div class="reading" id="bookText">📖 Loading reading...</div>
-    <div id="taskContainer"></div>
+  <div class="container" role="main" aria-labelledby="appTitle">
+    <h1 id="appTitle">🧘 Zen Life Reset</h1>
+    <h2>Day <span id="dayNumber"></span> of 60</h2>
+    <div class="reading">
+      <button aria-label="Read today's book excerpt" onclick="showExcerpt()">📖 Read this excerpt</button>
+    </div>
+    <div id="taskContainer" aria-live="polite" aria-relevant="additions"></div>
+    <div class="stats" role="region" aria-label="User stats">
+      <div><strong>XP</strong><div><span id="xp">0</span>/100</div><div class="progress-bar"><div class="progress-fill" id="xpBar"></div></div></div>
+      <div><strong>Coins</strong><div><span id="coins">0</span></div></div>
+      <div><strong>Streak</strong><div><span id="streak">0</span> days</div></div>
+    </div>
+    <div id="levelUpMessage" role="alert" aria-live="assertive">🎉 You leveled up! Great job! 🎉</div>
+    <button class="btn" onclick="resetDay()">Start New Day</button>
+  </div>
 
-    <div class="stats">
-      <div><strong>XP</strong><div><span id="xp">0</span>/100</div><div class="progress-bar"><div class="progress-fill" id="xpBar"></div></div></div>
-      <div><strong>Coins</strong><div><span id="coins">0</span></div></div>
-      <div><strong>Streak</strong><div><span id="streak">0</span> days</div></div>
-    </div>
+  <div class="modal" id="excerptModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="excerptText">
+    <div class="modal-content">
+      <button class="close" aria-label="Close excerpt modal" onclick="closeExcerpt()">&times;</button>
+      <p id="excerptText"></p>
+    </div>
+  </div>
 
-    <div id="levelUpMessage">🎉 You leveled up! Great job! 🎉</div>
-    <button class="btn" onclick="resetDay()">Start New Day</button>
-  </div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').then(() => {
+        console.log('Service Worker registered');
+      }).catch(err => {
+        console.warn('Service Worker registration failed:', err);
+      });
+    }
 
-  <script>
-    const taskPool = [...Array(60)].map((_, i) => [
-      "📖 Read 1 page from a book",
-      ...[
-        "🧊 Take a 30-second cold shower",
-        "🌅 Watch the sunrise",
-        "💬 Compliment someone",
-        "💧 Drink 8 glasses of water",
-        "🧘 Meditate 10 minutes",
-        "✍️ Journal 1 sentence",
-        "🍎 Eat a whole fruit",
-        "🚶 Walk 15 min outdoors",
-        "📵 Delete one app",
-        "🧎‍♂️ Stretch for 5 minutes",
-        "🙏 List 3 gratitudes",
-        "🔌 Turn phone off 30 min",
-        "🎨 Make something by hand",
-        "🧹 Clean a cluttered spot",
-        "📱 Call or text a friend",
-        "🌬️ 3 deep 5-sec breaths",
-        "📜 Write your future self",
-        "🚰 Water only 4 hrs",
-        "🌿 Go barefoot outside",
-        "😴 Sleep before 10pm",
-        "🎧 Listen to new music",
-        "💭 Write down a fear",
-        "💪 15 squats or pushups",
-        "🍽️ Eat without distraction",
-        "😂 Make someone laugh",
-        "🤐 10 minutes no talking",
-        "🕯️ Sit with a candle 5 min",
-        "💡 Counter 1 bad belief",
-        "📚 Read a Wikipedia page",
-        "🤍 Forgive someone mentally",
-        "🛏️ Make your bed mindfully",
-        "🥬 Eat something green",
-        "😌 Sit in silence 5 min",
-        "✏️ Draw something",
-        "👕 Dress to feel confident",
-        "🌟 Leave a good review",
-        "👁️ Hold eye contact longer",
-        "⛰️ Walk uphill/stairs",
-        "📖 Read physical book 10 min",
-        "🍵 Make tea, focus on it",
-        "💬 Describe your emotion",
-        "🙂 Smile at a stranger",
-        "🚫 Say no to something today",
-        "💡 Eat without your phone",
-        "🏆 Reflect on something proud",
-        "🗑️ Declutter one item",
-        "🧠 Guided meditation 10 min",
-        "✨ Recall biggest win this year",
-        "💗 Say 'I love you' to yourself",
-        "🧍 Stretch every hour today",
-        "🗓️ Write top 3 priorities",
-        "💃 Move differently today",
-        "📵 No social media till lunch",
-        "⏳ Work 30 min distraction-free",
-        "🥘 Cook from scratch",
-        "👂 Listen outside for 2 min",
-        "🎯 Write a goal",
-        "🧖 Let yourself relax",
-        "📬 Unsubscribe from an email",
-        "🔮 Visualize your ideal future",
-        "📴 Leave your phone in another room"
-      ].slice(i * 4, i * 4 + 4)
-    ]);
+    const excerpts = [
+      "“You have power over your mind—not outside events. Realize this, and you will find strength.” — Marcus Aurelius",
+      "“The best way out is always through.” — Robert Frost",
+      "“It is not length of life, but depth of life.” — Ralph Waldo Emerson",
+      "“Do what you can, with what you have, where you are.” — Theodore Roosevelt",
+      "“Success is not final, failure is not fatal: it is the courage to continue that counts.” — Winston Churchill",
+      "“Life appears to me too short to be spent in nursing animosity or registering wrongs.” — Charlotte Brontë",
+      "“Our life is what our thoughts make it.” — Marcus Aurelius",
+      "“All that we are is the result of what we have thought.” — Buddha",
+      "“What lies behind us and what lies before us are tiny matters compared to what lies within us.” — Emerson",
+      "“Happiness depends upon ourselves.” — Aristotle",
+      "“The mind is everything. What you think you become.” — Buddha",
+      "“Act as if what you do makes a difference. It does.” — William James",
+      "“You miss 100% of the shots you don’t take.” — Wayne Gretzky",
+      "“He who is brave is free.” — Seneca",
+      "“To live is the rarest thing in the world. Most people exist, that is all.” — Oscar Wilde",
+      "“Every strike brings me closer to the next home run.” — Babe Ruth",
+      "“Courage doesn't always roar.” — Mary Anne Radmacher",
+      "“It is never too late to be what you might have been.” — George Eliot",
+      "“Life isn’t about finding yourself. Life is about creating yourself.” — George Bernard Shaw",
+      "“Even if I knew that tomorrow the world would go to pieces, I would still plant my apple tree.” — Martin Luther",
+      "“Turn your wounds into wisdom.” — Oprah Winfrey",
+      "“Do not go where the path may lead, go instead where there is no path and leave a trail.” — Emerson",
+      "“Life is either a daring adventure or nothing at all.” — Helen Keller",
+      "“The journey of a thousand miles begins with one step.” — Lao Tzu",
+      "“You must be the change you wish to see in the world.” — Gandhi",
+      "“We are what we repeatedly do. Excellence, then, is not an act, but a habit.” — Aristotle",
+      "“There is no greater agony than bearing an untold story inside you.” — Maya Angelou",
+      "“Knowing yourself is the beginning of all wisdom.” — Aristotle",
+      "“It always seems impossible until it’s done.” — Nelson Mandela",
+      "“Simplicity is the ultimate sophistication.” — Leonardo da Vinci",
+      "“What you do makes a difference, and you have to decide what kind of difference you want to make.” — Jane Goodall",
+      "“To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.” — Emerson",
+      "“The only way to do great work is to love what you do.” — Steve Jobs",
+      "“Don’t count the days, make the days count.” — Muhammad Ali",
+      "“Don’t wait. The time will never be just right.” — Napoleon Hill",
+      "“Believe you can and you're halfway there.” — Theodore Roosevelt",
+      "“There is only one happiness in this life, to love and be loved.” — George Sand",
+      "“Great minds discuss ideas; average minds discuss events; small minds discuss people.” — Eleanor Roosevelt",
+      "“Be yourself; everyone else is already taken.” — Oscar Wilde",
+      "“What you get by achieving your goals is not as important as what you become by achieving your goals.” — Zig Ziglar",
+      "“Start where you are. Use what you have. Do what you can.” — Arthur Ashe",
+      "“In three words I can sum up everything I've learned about life: it goes on.” — Robert Frost",
+      "“The only limit to our realization of tomorrow is our doubts of today.” — Franklin D. Roosevelt",
+      "“I have not failed. I've just found 10,000 ways that won't work.” — Thomas Edison",
+      "“Dream big and dare to fail.” — Norman Vaughan",
+      "“Fall seven times and stand up eight.” — Japanese Proverb",
+      "“A year from now you may wish you had started today.” — Karen Lamb",
+      "“Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart.” — Roy T. Bennett",
+      "“Everything you can imagine is real.” — Pablo Picasso",
+      "“Happiness is not something ready made. It comes from your own actions.” — Dalai Lama",
+      "“What we think, we become.” — Buddha",
+      "“Be kind whenever possible. It is always possible.” — Dalai Lama",
+      "“Don’t cry because it’s over, smile because it happened.” — Dr. Seuss",
+      "“I can be changed by what happens to me. But I refuse to be reduced by it.” — Maya Angelou",
+      "“You are never too old to set another goal or to dream a new dream.” — C.S. Lewis",
+      "“A journey is best measured in friends, not in miles.” — Tim Cahill",
+      "“Success is how high you bounce when you hit bottom.” — George S. Patton",
+      "“It does not matter how slowly you go as long as you do not stop.” — Confucius",
+      "“Everything has beauty, but not everyone sees it.” — Confucius",
+      "“Peace begins with a smile.” — Mother Teresa",
+      "“Be the light that helps others see.” — Unknown"
+    ];
 
-    const bookPages = [...Array(60)].map((_, i) =>
-      `Day ${i + 1}: “You have power over your mind—not outside events. Realize this, and you will find strength.” – Marcus Aurelius`
-    );
+    const today = new Date().toISOString().split("T")[0];
+    let lastReset = localStorage.getItem("lastReset") || "";
+    let streak = parseInt(localStorage.getItem("streak") || "0");
+    if (lastReset !== today) {
+      streak += 1;
+      localStorage.setItem("streak", streak);
+      localStorage.setItem("lastReset", today);
+      localStorage.setItem("xp", "0");
+      localStorage.setItem("coins", "0");
+      for (let i = 0; i < 5; i++) localStorage.removeItem(`task${i}`);
+    }
 
-    const today = new Date().toISOString().split("T")[0];
-    let lastReset = localStorage.getItem("lastReset") || "";
-    let streak = parseInt(localStorage.getItem("streak") || "0");
-    if (lastReset !== today) {
-      streak += 1;
-      localStorage.setItem("streak", streak);
-      localStorage.setItem("lastReset", today);
-      localStorage.setItem("xp", "0");
-      localStorage.setItem("coins", "0");
-      for (let i = 0; i < 5; i++) localStorage.setItem(`task${i}`, "false");
-    }
+    const dayNumber = Math.min(streak, 60);
+    document.getElementById("dayNumber").innerText = dayNumber;
 
-    const dayNumber = Math.min(streak, 60);
-    document.getElementById("dayNumber").innerText = dayNumber;
-    document.getElementById("bookText").innerText = bookPages[dayNumber - 1] || "Enjoy your reading.";
-    const container = document.getElementById("taskContainer");
-
-    taskPool[dayNumber - 1]?.forEach((task, i) => {
-      const div = document.createElement("div");
-      div.className = "task";
-      div.innerHTML = `
-        <label for="task${i}">${task}</label>
-        <input type="checkbox" id="task${i}" ${localStorage.getItem(`task${i}`)==="true"?"checked":""} onchange="checkTask(this, ${i})" />
-      `;
-      container.appendChild(div);
-    });
-
-    let xp = parseInt(localStorage.getItem("xp") || "0");
-    let coins = parseInt(localStorage.getItem("coins") || "0");
-    document.getElementById("xp").innerText = xp;
-    document.getElementById("coins").innerText = coins;
-    document.getElementById("streak").innerText = streak;
-    document.getElementById("xpBar").style.width = (xp % 100) + "%";
-    if (xp >= 100) document.getElementById("levelUpMessage").style.display = "block";
-
-    function checkTask(cb, index) {
-      localStorage.setItem(`task${index}`, cb.checked);
-      if (cb.checked) {
-        xp += 10;
-        coins += 1;
-      } else {
-        xp -= 10;
-        coins = Math.max(0, coins - 1);
-      }
-      localStorage.setItem("xp", xp);
-      localStorage.setItem("coins", coins);
-      document.getElementById("xp").innerText = xp;
-      document.getElementById("coins").innerText = coins;
-      document.getElementById("xpBar").style.width = (xp % 100) + "%";
-      document.getElementById("levelUpMessage").style.display = xp >= 100 ? "block" : "none";
-    }
-
-    function resetDay() {
-      alert("✨ New day started. Reflect, reset, and begin again.");
-      localStorage.setItem("lastReset", "");
-      location.reload();
-    }
-  </script>
-</body>
-</html>
+    // Daily unique tasks for 60 days, 4 tasks + reading per day
+    const dailyTasks = [
+      ["🧊 Cold shower", "🌅 Watch the sunrise", "💬 Compliment someone", "💧 Drink 8 glasses of water"],
+      ["🧘 Meditate 10 minutes", "✍️ Journal 1 sentence", "🍎 Eat a whole fruit", "🚶 Walk 15 min outdoors"],
+      ["📵 Delete one app", "🧎‍♂️ Stretch for 5 minutes", "🙏 List 3 gratitudes", "🔌 Turn phone off 30 min"],
+      ["🎨 Make something by hand", "🧹 Clean a cluttered spot", "📱 Call or text a friend", "🌬️ 3 deep 5-sec breaths"],
+      ["📜 Write your future self", "🚰 Water only 4 hrs", "🌿 Go barefoot outside", "😴 Sleep before 10pm"],
+      ["🎧 Listen to new music", "💭 Write down a fear", "💪 15 squats or pushups", "🍽️ Eat without distraction"],
+      ["😂 Make someone laugh", "🤐 10 minutes no talking", "🕯️ Sit with a candle 5 min", "💡 Counter 1 bad belief"],
+      ["📚 Read a Wikipedia page", "🤍 Forgive someone mentally", "🛏️ Make your bed mindfully", "🥬 Eat something green"],
+      ["😌 Sit in silence 5 min", "✏️ Draw something", "👕 Dress to feel confident", "🌟 Leave a good review"],
+      ["👁️ Hold eye contact longer", "⛰️ Walk uphill/stairs", "📖 Read physical book 10 min", "🍵 Make tea, focus on it"],
+      ["💬 Describe your emotion", "🙂 Smile at a stranger", "🚫 Say no to something today", "💡 Eat without your phone"],
+      ["🏆 Reflect on something proud", "🗑️ Declutter one item", "🧠 Guided meditation 10 min", "✨ Recall biggest win this year"],
+      ["💗 Say 'I love you' to yourself", "🧍 Stretch every hour today", "🗓️ Write top 3 priorities", "💃 Move differently today"],
+      ["📵 No social media till lunch", "⏳ Work 30 min distraction-free", "🥘 Cook from scratch", "👂 Listen outside for 2 min"],
+      ["🎯 Write a goal", "🧖 Let yourself relax", "📬 Unsubscribe from an email", "🔮 Visualize your ideal future"],
+      ["📴 Leave your phone in another room", "🧘 Yoga stretch", "🍲 Try a new recipe", "📅 Plan your week ahead"],
+      ["🎼 Listen to a new genre", "📝 Write a thank you note", "🌳 Spend time in nature", "🛀 Take a relaxing bath"],
+      ["🤝 Help someone in need", "📺 Limit screen time to 1 hour", "💤 Take a power nap", "🖼️ Create a vision board"],
+      ["🌸 Plant a seed or flower", "📷 Take photos mindfully", "💭 Practice positive affirmations", "📖 Read about a new topic"],
+      ["🧩 Solve a puzzle or brain teaser", "🕺 Dance for 5 minutes", "👥 Have a meaningful conversation", "🎲 Play a board game"],
+      ["📚 Organize your bookshelf", "🧴 Self-care: skincare or massage", "🛋️ Declutter one area of your home", "🚴 Ride a bike"],
+      ["🍫 Treat yourself mindfully", "📅 Review monthly goals", "🗣️ Speak kindly about yourself", "🧹 Clean your workspace"],
+      ["🎁 Give a small gift", "📣 Share a positive story", "✉️ Write a letter to a loved one", "📵 No phone for 1 hour"],
+      ["🥕 Eat more vegetables today", "📌 Set 3 micro goals", "🌞 Spend 10 min in sunlight", "🧘 Practice deep breathing"],
+      ["🧑‍🍳 Cook a meal from scratch", "🛒 Plan healthy meals", "📱 Turn off notifications for 2 hours", "📝 Reflect on your progress"],
+      ["🌺 Compliment a stranger", "🎶 Create a playlist of happy songs", "💧 Drink herbal tea", "🛌 Go to bed 30 minutes earlier"],
+      ["📊 Track your habits", "🖌️ Paint or color", "📚 Read a poem", "🎯 Set a new challenge"],
+      ["📢 Practice public speaking", "📖 Read a biography", "🏃 Do a quick workout", "🌜 Practice gratitude before bed"],
+      ["🕰️ Limit social media to 30 min", "💬 Reach out to an old friend", "🌟 List your strengths", "🥤 Drink a smoothie"],
+      ["💭 Meditate on kindness", "🖋️ Write your goals", "🧑‍🤝‍🧑 Volunteer", "🎉 Celebrate a small win"],
+      ["📕 Learn a new word", "🧩 Brain training app", "👟 Take a new route walking", "📦 Donate unused items"],
+      ["🎒 Prepare for tomorrow", "🧘 Morning stretch", "📝 Journal your thoughts", "🎥 Watch an inspiring video"],
+      ["📚 Read non-fiction",
